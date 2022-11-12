@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - eat
+  - ManagerScene
+  - particles
+  - positionPet
+  - Stop
+  - plane
+  - banana
+  - terrain
+  - cucha
+  - ball
+  - fox
+  - target
+  - print
+  - chicken
+  - collectFood
+  - tree
+  - maxX
+  - minX
+  - maxZ
+  - minZ
+  - rock
+  - canvas
+  - Text
+  - pointCloud
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Terrain
+  - collectFood
+  - Tree
+  - Cucha
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
