@@ -3,99 +3,106 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 public class TouchEat : MonoBehaviour
-{      
+{
     private Vector3 target;
-    private bool move = false;
-    public static bool spawnBanana = false;
+    public bool move = false;    
     public static bool UIDetect = false;   
     private Rigidbody rb;
-    private Animator anim;
-    private bool Sit = false;
+    private Animator anim;    
     private bool Idle = true;
     private bool Walk = false;
-    private bool Eat = false;
+    public bool iniciateMove = false;
 
-    Vector3 posicionInicial;
-    Vector3 posicionFinal;
-    Vector3 lookPosition;
-    Vector3 traspasoHit;
-    bool sitF = false;
-    bool moveF = false;
-    bool eatF = false;
-
-    public LayerMask collectChicken;
-
-    [SerializeField]private GameObject FloatingTextPrefab;
-    private GameObject canvas;
-    private GameObject positionFloatingText;
-    
-    
-
+    public LayerMask evitarRayos;    
+    private GameObject canvas;  
+    [SerializeField] private GameObject printss;
+    [SerializeField] private GameObject reinicioLvl;
+    [SerializeField] private GameObject proxLevel;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        canvas = GameObject.FindGameObjectWithTag("canvas");
         target = this.transform.position;
+    }
+    void Start()
+    {        
+        Idle = true;
+        printss = GameObject.FindGameObjectWithTag("print");
+        canvas = GameObject.FindGameObjectWithTag("canvas");        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        
-        
-        Invoke("MovementOn", 2f);
-        target = this.transform.position;
+        reinicioLvl = canvas.transform.GetChild(3).gameObject;
+        proxLevel = canvas.transform.GetChild(2).gameObject;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
-        if (Vector3.Distance(this.transform.position, target) < 0.001f)
-        {
-            Idle = true;
-            Walk = false;            
-            target = this.transform.position;
-        }   
+    {        
+        printss.GetComponent<Text>().text = ""+ Vector3.Distance(this.transform.position, target);
 
+        if (Vector3.Distance(this.transform.position,target)<0.001)
+        {            
+            Walk = false;
+            Idle = true;
+            move = true;//Move en true para permitir nuevamente el movimiento
+        }
+        else if(Vector3.Distance(this.transform.position, target) > 0.02f)
+        {
+            Walk = true;
+            Idle = false;
+        }
         IsPointerOverUIObject();        
         Touch();
         anim.SetBool("Idle", Idle);        
-        anim.SetBool("Walk", Walk);
+        anim.SetBool("Walk", Walk);       
         
     }
     private void FixedUpdate()
     {        
-        if (move)
-        {
-            Movement(target);
-        }
+        Movement(target);        
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("cucha"))
-        {            
-            
-        }        
+        if (collision.gameObject.CompareTag("tree"))
+        {
+            move = true;
+        }
+             
         if (collision.gameObject.CompareTag("ball"))
         {            
             collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 2f, ForceMode.Force);
             
         }
+        if (collision.gameObject.CompareTag("lava"))
+        {
+            
+            StartCoroutine(DestroyLevelAndFox(3f));
+            reinicioLvl.SetActive(true);
+        }
+        if (collision.gameObject.CompareTag("NextLevel"))
+        {
+            Walk = false;
+            Idle = true;
+            StartCoroutine(DestroyLevelAndFox(3f));
+            proxLevel.SetActive(true);
+        }
     }    
     
     void Movement(Vector3 target)
-    {
-        rb.MovePosition(Vector3.MoveTowards(this.transform.position, new Vector3(target.x, this.transform.position.y, target.z), 0.1f * 2f * Time.deltaTime));//SPEED
+    {        
+        rb.MovePosition(Vector3.MoveTowards(this.transform.position, new Vector3(target.x, this.transform.position.y, target.z), 0.1f * 0.5f * Time.deltaTime));//SPEED
     }
     void Touch()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && move && iniciateMove)
         {            
             Touch toque = Input.GetTouch(0);
             Ray ray = Camera.main.ScreenPointToRay(toque.position);
             RaycastHit hit;            
-            canvas.transform.GetChild(0).GetComponent<TMP_Text>().text = "";            
-            if (Physics.Raycast(ray, out hit,100, ~collectChicken) && !UIDetect)
+            canvas.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
+            if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)
             {                        
                  if (!hit.collider.CompareTag("fox"))
                  {
@@ -103,14 +110,20 @@ public class TouchEat : MonoBehaviour
                         var rotatition = target-this.transform.position;
                         rotatition.y = 0;
                         this.transform.rotation = Quaternion.LookRotation(rotatition);
+                        move = false;//Para no permitir un movimiento mientras se mueve
                     
-                 }                        
-                 
+                 }
+                 if (hit.collider.CompareTag("tree"))
+                 {
+                    target = this.transform.position;
+                    var rotatition = hit.point - this.transform.position;
+                    rotatition.y = 0;
+                    this.transform.rotation = Quaternion.LookRotation(rotatition);
+                 }
+
             }
-                 
-            
         }
-    }
+    }   
 
     private void IsPointerOverUIObject()//DETECTO UI 
     {
@@ -126,25 +139,16 @@ public class TouchEat : MonoBehaviour
         {
             UIDetect = false;
         }
-    }
+    }   
 
-    void MovementOn()
+    IEnumerator DestroyLevelAndFox(float timeDestroy)
     {
-        move = true;
+        yield return new WaitForSeconds(timeDestroy);        
+        var level = GameObject.FindGameObjectWithTag("level");
+        Destroy(level);
+        Destroy(this.gameObject);
     }
 
-
-    IEnumerator DestroyObject(GameObject colision, float timeDestroy)
-    {
-        yield return new WaitForSeconds(timeDestroy);
-        Idle = true;
-        Walk = false;
-        Sit = false;
-        Eat = false;
-        eatF = false;
-        Destroy(colision);
-        
-    }
-        
+    
 
 }

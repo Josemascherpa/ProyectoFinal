@@ -74,11 +74,7 @@ public class PlacementIndicator : MonoBehaviour
                     var lvl1 = Instantiate(Level1);
                     lvl1.transform.position = hits[0].pose.position;
                     lvl1.transform.rotation = Ubicator.transform.rotation;
-                    lvl1.transform.SetParent(null);
-                    //terrain.transform.position = hits[0].pose.position;//POSICIONAR TERRENO
-                    //terrain.transform.SetParent(null);//DEJARLO SIN PADRE
-                    //terrain.SetActive(true);//ACTIVARLO
-                    //QUE EL TERRENO SE ENCARGUE DE INSTANCIAR
+                    lvl1.transform.SetParent(null);                    
                     arPlaneManager.enabled = false;
                     arPointCloudManager.enabled = false;
                     Destroy(planeGO);

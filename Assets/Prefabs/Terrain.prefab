@@ -610,17 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706edd1315f226b419ab55dfb3a4aac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 6813423562823748741, guid: 947e312c39ccc804b816d5dc40b02752, type: 3}
-  - {fileID: 2032981170667225360, guid: e1dd934f815102244b0a205de5ebea65, type: 3}
-  - {fileID: 842615737878310849, guid: c381c5bd45f109b47a0461de83270854, type: 3}
-  - {fileID: 1552458913554426465, guid: 307b3053036bb6543bf41024e65e8494, type: 3}
-  - {fileID: 8272994669369629210, guid: bc8e9d28f0929844285aecf088ca62f8, type: 3}
-  - {fileID: 4025176068105139670, guid: 0cdafbbda91772f40a464e5024a6a226, type: 3}
-  - {fileID: 171831329627471640, guid: 157810dfdeec8414bbbfb72eedda7a56, type: 3}
-  - {fileID: 7134009958100330455, guid: 3c9c5cccdcf08734ea8ef955a8f28811, type: 3}
-  - {fileID: 8871022496961237260, guid: 47602752865328244b959e7169085060, type: 3}
-  - {fileID: 186338178033338351, guid: 4c8882940e3b85f4fae786294ba32e76, type: 3}
+  fox: {fileID: 9094510363042670188, guid: d7406989310f0a24c997ed896c4efbf0, type: 3}
 --- !u!65 &5734258849840628170
 BoxCollider:
   m_ObjectHideFlags: 0

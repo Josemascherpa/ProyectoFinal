@@ -5,6 +5,7 @@ using UnityEngine;
 public class TerrainScript : MonoBehaviour
 {
     [SerializeField] private GameObject fox;
+    private GameObject foxInstantiate;
 
     private void Awake()
     {
@@ -12,11 +13,12 @@ public class TerrainScript : MonoBehaviour
     }
     private void Start()
     {
-        Instantiate(fox, this.transform.GetChild(0).transform.position,Quaternion.identity);
-    }
+        foxInstantiate = Instantiate(fox, this.transform.GetChild(0).transform.position,Quaternion.identity);
+        Invoke("MoveFox", 3f);
+    }        
 
-    private void Update()
+    public void MoveFox()
     {
-        
+        foxInstantiate.GetComponent<TouchEat>().iniciateMove = true;
     }
 }

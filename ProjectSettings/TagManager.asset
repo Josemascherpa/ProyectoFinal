@@ -28,6 +28,11 @@ TagManager:
   - canvas
   - Text
   - pointCloud
+  - NextLevel
+  - level
+  - lava
+  - reinicioLvl
+  - proximoLvl
   layers:
   - Default
   - TransparentFX
