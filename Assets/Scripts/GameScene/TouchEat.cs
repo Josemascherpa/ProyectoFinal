@@ -18,18 +18,16 @@ public class TouchEat : MonoBehaviour
 
     public LayerMask evitarRayos;    
     private GameObject canvas;  
-    [SerializeField] private GameObject printss;
+    //[SerializeField] private GameObject printss;
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;
+    private Quaternion rotationInicio;
     // Start is called before the first frame update
-    private void Awake()
-    {
-        target = this.transform.position;
-    }
+    
     void Start()
-    {        
-        Idle = true;
-        printss = GameObject.FindGameObjectWithTag("print");
+    {
+        target = this.transform.position;             
+        
         canvas = GameObject.FindGameObjectWithTag("canvas");        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -39,9 +37,8 @@ public class TouchEat : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        printss.GetComponent<Text>().text = ""+ Vector3.Distance(this.transform.position, target);
-
+    {
+        
         if (Vector3.Distance(this.transform.position,target)<0.001)
         {            
             Walk = false;
@@ -49,7 +46,7 @@ public class TouchEat : MonoBehaviour
             move = true;//Move en true para permitir nuevamente el movimiento
         }
         else if(Vector3.Distance(this.transform.position, target) > 0.02f)
-        {
+        {            
             Walk = true;
             Idle = false;
         }
@@ -64,7 +61,7 @@ public class TouchEat : MonoBehaviour
         Movement(target);        
     }
     private void OnCollisionEnter(Collision collision)
-    {
+    {        
         if (collision.gameObject.CompareTag("tree"))
         {
             move = true;
@@ -77,15 +74,17 @@ public class TouchEat : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("lava"))
         {
-            
-            StartCoroutine(DestroyLevelAndFox(3f));
+            move = false;
+            StartCoroutine(DestroyLevelAndFox(1.5f));
             reinicioLvl.SetActive(true);
+            rb.detectCollisions = false;
         }
         if (collision.gameObject.CompareTag("NextLevel"))
         {
+            target = this.transform.position;
             Walk = false;
             Idle = true;
-            StartCoroutine(DestroyLevelAndFox(3f));
+            StartCoroutine(DestroyLevelAndFox(1.5f));
             proxLevel.SetActive(true);
         }
     }    
@@ -110,7 +109,7 @@ public class TouchEat : MonoBehaviour
                         var rotatition = target-this.transform.position;
                         rotatition.y = 0;
                         this.transform.rotation = Quaternion.LookRotation(rotatition);
-                        move = false;//Para no permitir un movimiento mientras se mueve
+                       // move = false;//Para no permitir un movimiento mientras se mueve
                     
                  }
                  if (hit.collider.CompareTag("tree"))

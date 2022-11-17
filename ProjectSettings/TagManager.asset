@@ -33,6 +33,7 @@ TagManager:
   - lava
   - reinicioLvl
   - proximoLvl
+  - managerLevel
   layers:
   - Default
   - TransparentFX

@@ -1457,7 +1457,8 @@ MonoBehaviour:
   evitarRayos:
     serializedVersion: 2
     m_Bits: 0
-  printss: {fileID: 0}
+  reinicioLvl: {fileID: 0}
+  proxLevel: {fileID: 0}
 --- !u!65 &6481716348891710153
 BoxCollider:
   m_ObjectHideFlags: 0

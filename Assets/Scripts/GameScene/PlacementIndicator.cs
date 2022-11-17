@@ -73,7 +73,9 @@ public class PlacementIndicator : MonoBehaviour
                     timeCanvas.text = "";
                     var lvl1 = Instantiate(Level1);
                     lvl1.transform.position = hits[0].pose.position;
+                    Singleton.positionLevels = hits[0].pose.position;
                     lvl1.transform.rotation = Ubicator.transform.rotation;
+                    Singleton.rotationLevels = Ubicator.transform.rotation;
                     lvl1.transform.SetParent(null);                    
                     arPlaneManager.enabled = false;
                     arPointCloudManager.enabled = false;
