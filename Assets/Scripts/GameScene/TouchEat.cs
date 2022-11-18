@@ -22,6 +22,8 @@ public class TouchEat : MonoBehaviour
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;
     private Quaternion rotationInicio;
+
+    public float SPEED;
     // Start is called before the first frame update
     
     void Start()
@@ -91,7 +93,7 @@ public class TouchEat : MonoBehaviour
     
     void Movement(Vector3 target)
     {        
-        rb.MovePosition(Vector3.MoveTowards(this.transform.position, new Vector3(target.x, this.transform.position.y, target.z), 0.1f * 0.5f * Time.deltaTime));//SPEED
+        rb.MovePosition(Vector3.MoveTowards(this.transform.position, new Vector3(target.x, this.transform.position.y, target.z), 0.1f * SPEED * Time.deltaTime));//SPEED
     }
     void Touch()
     {
