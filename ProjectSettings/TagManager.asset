@@ -34,6 +34,7 @@ TagManager:
   - reinicioLvl
   - proximoLvl
   - managerLevel
+  - plataformaMov
   layers:
   - Default
   - TransparentFX

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEngine.UI;
+
 
 public class TouchEat : MonoBehaviour
 {
-    private Vector3 target;
+    
     public bool move = false;    
     public static bool UIDetect = false;   
     private Rigidbody rb;
@@ -24,12 +24,15 @@ public class TouchEat : MonoBehaviour
     private Quaternion rotationInicio;
 
     public float SPEED;
-    // Start is called before the first frame update
+    private GameObject target;
+    [SerializeField] private GameObject prefabTarget;
+
     
     void Start()
     {
-        target = this.transform.position;             
-        
+        print("ASDFFASDFSD");
+        target = GameObject.FindGameObjectWithTag("eat");
+        target.transform.position = this.transform.position;
         canvas = GameObject.FindGameObjectWithTag("canvas");        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -40,14 +43,20 @@ public class TouchEat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            Instantiate(prefabTarget);
+            target = GameObject.FindGameObjectWithTag("eat");
+            target.transform.position = this.transform.position;
+        }
         
-        if (Vector3.Distance(this.transform.position,target)<0.001)
+        if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)
         {            
             Walk = false;
             Idle = true;
             move = true;//Move en true para permitir nuevamente el movimiento
         }
-        else if(Vector3.Distance(this.transform.position, target) > 0.02f)
+        else if(Vector3.Distance(this.transform.position, target.transform.position) > 0.02f)
         {            
             Walk = true;
             Idle = false;
@@ -60,7 +69,7 @@ public class TouchEat : MonoBehaviour
     }
     private void FixedUpdate()
     {        
-        Movement(target);        
+        Movement(target.transform.position);        
     }
     private void OnCollisionEnter(Collision collision)
     {        
@@ -83,14 +92,26 @@ public class TouchEat : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("NextLevel"))
         {
-            target = this.transform.position;
+            //target = this.transform.position;
             Walk = false;
             Idle = true;
             StartCoroutine(DestroyLevelAndFox(1.5f));
             proxLevel.SetActive(true);
         }
-    }    
-    
+        if (collision.gameObject.CompareTag("plataformaMov"))
+        {
+            this.transform.SetParent(collision.gameObject.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("plataformaMov"))
+        {
+            this.transform.SetParent(null);
+        }
+    }
+
     void Movement(Vector3 target)
     {        
         rb.MovePosition(Vector3.MoveTowards(this.transform.position, new Vector3(target.x, this.transform.position.y, target.z), 0.1f * SPEED * Time.deltaTime));//SPEED
@@ -107,8 +128,9 @@ public class TouchEat : MonoBehaviour
             {                        
                  if (!hit.collider.CompareTag("fox"))
                  {
-                        target = hit.point; 
-                        var rotatition = target-this.transform.position;
+                        target.transform.SetParent(null);
+                        target.transform.position = hit.point; 
+                        var rotatition = target.transform.position-this.transform.position;
                         rotatition.y = 0;
                         this.transform.rotation = Quaternion.LookRotation(rotatition);
                        // move = false;//Para no permitir un movimiento mientras se mueve
@@ -116,7 +138,7 @@ public class TouchEat : MonoBehaviour
                  }
                  if (hit.collider.CompareTag("tree"))
                  {
-                    target = this.transform.position;
+                    target.transform.position= this.transform.position;
                     var rotatition = hit.point - this.transform.position;
                     rotatition.y = 0;
                     this.transform.rotation = Quaternion.LookRotation(rotatition);
@@ -146,7 +168,9 @@ public class TouchEat : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDestroy);        
         var level = GameObject.FindGameObjectWithTag("level");
+        target.transform.SetParent(null);
         Destroy(level);
+        
         Destroy(this.gameObject);
     }
 
