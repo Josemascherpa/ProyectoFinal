@@ -5,8 +5,7 @@ using UnityEngine;
 public class targetFox : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
-    {
-        print("ADSF");
+    {        
         this.transform.SetParent(other.gameObject.transform);
         if (other.CompareTag("fox"))
         {

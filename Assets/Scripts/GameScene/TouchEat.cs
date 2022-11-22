@@ -29,8 +29,7 @@ public class TouchEat : MonoBehaviour
 
     
     void Start()
-    {
-        print("ASDFFASDFSD");
+    {        
         target = GameObject.FindGameObjectWithTag("eat");
         target.transform.position = this.transform.position;
         canvas = GameObject.FindGameObjectWithTag("canvas");        
@@ -42,19 +41,18 @@ public class TouchEat : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (target == null)
         {
             Instantiate(prefabTarget);
             target = GameObject.FindGameObjectWithTag("eat");
             target.transform.position = this.transform.position;
-        }
-        
+        }        
         if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)
         {            
             Walk = false;
             Idle = true;
-            move = true;//Move en true para permitir nuevamente el movimiento
+            move = false;
         }
         else if(Vector3.Distance(this.transform.position, target.transform.position) > 0.02f)
         {            
@@ -68,20 +66,23 @@ public class TouchEat : MonoBehaviour
         
     }
     private void FixedUpdate()
-    {        
-        Movement(target.transform.position);        
+    {
+        if (move)
+        {
+            Movement(target.transform.position);
+        }
+            
     }
     private void OnCollisionEnter(Collision collision)
     {        
         if (collision.gameObject.CompareTag("tree"))
         {
-            move = true;
+            this.transform.SetParent(collision.gameObject.transform);
         }
              
         if (collision.gameObject.CompareTag("ball"))
         {            
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 2f, ForceMode.Force);
-            
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 2f, ForceMode.Force);            
         }
         if (collision.gameObject.CompareTag("lava"))
         {
@@ -118,7 +119,7 @@ public class TouchEat : MonoBehaviour
     }
     void Touch()
     {
-        if (Input.touchCount > 0 && move && iniciateMove)
+        if (Input.touchCount > 0 && iniciateMove)
         {            
             Touch toque = Input.GetTouch(0);
             Ray ray = Camera.main.ScreenPointToRay(toque.position);
@@ -133,7 +134,8 @@ public class TouchEat : MonoBehaviour
                         var rotatition = target.transform.position-this.transform.position;
                         rotatition.y = 0;
                         this.transform.rotation = Quaternion.LookRotation(rotatition);
-                       // move = false;//Para no permitir un movimiento mientras se mueve
+                        move = true;
+                       
                     
                  }
                  if (hit.collider.CompareTag("tree"))
