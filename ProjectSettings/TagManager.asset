@@ -7,12 +7,8 @@ TagManager:
   - eat
   - ManagerScene
   - particles
-  - positionPet
-  - Stop
-  - plane
   - banana
   - terrain
-  - cucha
   - ball
   - fox
   - target
@@ -20,11 +16,6 @@ TagManager:
   - chicken
   - collectFood
   - tree
-  - maxX
-  - minX
-  - maxZ
-  - minZ
-  - rock
   - canvas
   - Text
   - pointCloud
@@ -35,6 +26,7 @@ TagManager:
   - proximoLvl
   - managerLevel
   - plataformaMov
+  - managerLvl3
   layers:
   - Default
   - TransparentFX

@@ -1441,10 +1441,10 @@ MonoBehaviour:
   iniciateMove: 0
   evitarRayos:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 384
   reinicioLvl: {fileID: 0}
   proxLevel: {fileID: 0}
-  SPEED: 0.8
+  SPEED: 1
   prefabTarget: {fileID: 1868642021432430035, guid: 6847bb81553fe554c974696733ecff60, type: 3}
 --- !u!65 &6481716348891710153
 BoxCollider:

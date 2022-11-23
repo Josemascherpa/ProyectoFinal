@@ -77,12 +77,12 @@ public class TouchEat : MonoBehaviour
     {        
         if (collision.gameObject.CompareTag("tree"))
         {
-            this.transform.SetParent(collision.gameObject.transform);
+            //this.transform.SetParent(collision.gameObject.transform);//POR SI SE BUGEA CON EL COSTADO
         }
              
         if (collision.gameObject.CompareTag("ball"))
         {            
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 2f, ForceMode.Force);            
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.5f, ForceMode.Impulse);            
         }
         if (collision.gameObject.CompareTag("lava"))
         {
@@ -98,7 +98,10 @@ public class TouchEat : MonoBehaviour
             Idle = true;
             StartCoroutine(DestroyLevelAndFox(1.5f));
             proxLevel.SetActive(true);
-        }
+        }        
+    }
+    private void OnCollisionStay(Collision collision)
+    {
         if (collision.gameObject.CompareTag("plataformaMov"))
         {
             this.transform.SetParent(collision.gameObject.transform);
@@ -138,13 +141,13 @@ public class TouchEat : MonoBehaviour
                        
                     
                  }
-                 if (hit.collider.CompareTag("tree"))
+                 /*if (hit.collider.CompareTag("tree"))
                  {
                     target.transform.position= this.transform.position;
                     var rotatition = hit.point - this.transform.position;
                     rotatition.y = 0;
                     this.transform.rotation = Quaternion.LookRotation(rotatition);
-                 }
+                 }*/
 
             }
         }
