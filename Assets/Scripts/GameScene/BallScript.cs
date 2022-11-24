@@ -15,11 +15,11 @@ public class BallScript : MonoBehaviour
         if (collision.gameObject.CompareTag("tree"))
         {
             print("ASDASDF");
-            this.transform.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.8f * -1, ForceMode.Impulse);
+            this.transform.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.3f * -1, ForceMode.Impulse);
         }
     }
 
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("chicken"))

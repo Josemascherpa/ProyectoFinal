@@ -22,14 +22,14 @@ public class TouchEat : MonoBehaviour
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;
     private Quaternion rotationInicio;
-
     public float SPEED;
     private GameObject target;
     [SerializeField] private GameObject prefabTarget;
-
+   
     
     void Start()
     {        
+
         target = GameObject.FindGameObjectWithTag("eat");
         target.transform.position = this.transform.position;
         canvas = GameObject.FindGameObjectWithTag("canvas");        
@@ -41,7 +41,8 @@ public class TouchEat : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        
         if (target == null)
         {
             Instantiate(prefabTarget);
@@ -82,7 +83,7 @@ public class TouchEat : MonoBehaviour
              
         if (collision.gameObject.CompareTag("ball"))
         {            
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.5f, ForceMode.Impulse);            
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.8f, ForceMode.Impulse);            
         }
         if (collision.gameObject.CompareTag("lava"))
         {
@@ -138,7 +139,15 @@ public class TouchEat : MonoBehaviour
                         rotatition.y = 0;
                         this.transform.rotation = Quaternion.LookRotation(rotatition);
                         move = true;
-                       
+                        if (Singleton.Level == 2)
+                        {                            
+                            var managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
+                            managerLvl3.GetComponent<ManagerLvl3>().startTimer = true;
+                            var fox = GameObject.FindGameObjectWithTag("fox");
+                            fox.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                            
+
+                        }
                     
                  }
                  /*if (hit.collider.CompareTag("tree"))

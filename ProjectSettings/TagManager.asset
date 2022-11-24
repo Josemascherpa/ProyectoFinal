@@ -27,6 +27,13 @@ TagManager:
   - managerLevel
   - plataformaMov
   - managerLvl3
+  - plane
+  - positionBallLvl3
+  - Xlvl3
+  - Zlvl3
+  - X2lvl3
+  - Z2lvl3
+  - timer
   layers:
   - Default
   - TransparentFX
