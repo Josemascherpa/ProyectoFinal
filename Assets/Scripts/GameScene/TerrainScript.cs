@@ -8,7 +8,6 @@ public class TerrainScript : MonoBehaviour
     [SerializeField] private GameObject fox;
     private GameObject foxInstantiate;
     private GameObject canvas;
-
    
     private void Start()
     {
@@ -19,17 +18,13 @@ public class TerrainScript : MonoBehaviour
         {
             case 0: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES PASAR AL OTRO LADO SIN CAERTE EN LA LAVA"; break;
             case 1: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES PASAR POR LAS PLATAFORMAS Y LLEGAR AL OTRO LADO"; break;
-            case 2: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES EMPUJAR LA PELOTA Y JUNTAR TODOS LOS POLLITOS"; break;
+            case 2: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES EMPUJAR LA PELOTA Y JUNTAR LA MITAD DE LOS POLLITOS"; break;
             default: break;
         }
     }
 
-    private void Update()
-    {
-        
-    }
     public void MoveFox()
     {
-        foxInstantiate.GetComponent<TouchEat>().iniciateMove = true;
+        foxInstantiate.GetComponent<TouchFox>().iniciateMove = true;
     }
 }

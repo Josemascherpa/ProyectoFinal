@@ -34,6 +34,7 @@ TagManager:
   - X2lvl3
   - Z2lvl3
   - timer
+  - targetFox
   layers:
   - Default
   - TransparentFX

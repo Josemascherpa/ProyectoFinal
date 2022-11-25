@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using TMPro;
 
 
-public class TouchEat : MonoBehaviour
+
+public class TouchFox : MonoBehaviour
 {
     
     public bool move = false;    
@@ -21,18 +23,22 @@ public class TouchEat : MonoBehaviour
     //[SerializeField] private GameObject printss;
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;
-    private Quaternion rotationInicio;
-    public float SPEED;
+    
+    private float SPEED = 1;
     private GameObject target;
     [SerializeField] private GameObject prefabTarget;
-   
-    
-    void Start()
-    {        
 
-        target = GameObject.FindGameObjectWithTag("eat");
+    private GameObject managerLvl3;
+
+
+
+    void Start()
+    {
+        
+        target = GameObject.FindGameObjectWithTag("targetFox");
         target.transform.position = this.transform.position;
-        canvas = GameObject.FindGameObjectWithTag("canvas");        
+        canvas = GameObject.FindGameObjectWithTag("canvas");
+        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         reinicioLvl = canvas.transform.GetChild(3).gameObject;
@@ -42,11 +48,12 @@ public class TouchEat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        canvas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "" + SPEED;
+
         if (target == null)
         {
             Instantiate(prefabTarget);
-            target = GameObject.FindGameObjectWithTag("eat");
+            target = GameObject.FindGameObjectWithTag("targetFox");
             target.transform.position = this.transform.position;
         }        
         if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)
@@ -75,20 +82,16 @@ public class TouchEat : MonoBehaviour
             
     }
     private void OnCollisionEnter(Collision collision)
-    {        
-        if (collision.gameObject.CompareTag("tree"))
-        {
-            //this.transform.SetParent(collision.gameObject.transform);//POR SI SE BUGEA CON EL COSTADO
-        }
+    {               
              
         if (collision.gameObject.CompareTag("ball"))
         {            
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.8f, ForceMode.Impulse);            
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 1f, ForceMode.Impulse);            
         }
         if (collision.gameObject.CompareTag("lava"))
         {
             move = false;
-            StartCoroutine(DestroyLevelAndFox(1.5f));
+            StartCoroutine(DestroyLevelAndFox(0.01f));
             reinicioLvl.SetActive(true);
             rb.detectCollisions = false;
         }
@@ -97,7 +100,7 @@ public class TouchEat : MonoBehaviour
             //target = this.transform.position;
             Walk = false;
             Idle = true;
-            StartCoroutine(DestroyLevelAndFox(1.5f));
+            StartCoroutine(DestroyLevelAndFox(0.01f));
             proxLevel.SetActive(true);
         }        
     }
@@ -132,7 +135,7 @@ public class TouchEat : MonoBehaviour
             if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)
             {                        
                  if (!hit.collider.CompareTag("fox"))
-                 {
+                 {                        
                         target.transform.SetParent(null);
                         target.transform.position = hit.point; 
                         var rotatition = target.transform.position-this.transform.position;
@@ -141,23 +144,12 @@ public class TouchEat : MonoBehaviour
                         move = true;
                         if (Singleton.Level == 2)
                         {                            
-                            var managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
+                            managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
                             managerLvl3.GetComponent<ManagerLvl3>().startTimer = true;
-                            var fox = GameObject.FindGameObjectWithTag("fox");
-                            fox.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                            
-
+                            managerLvl3 = null;                            
                         }
                     
                  }
-                 /*if (hit.collider.CompareTag("tree"))
-                 {
-                    target.transform.position= this.transform.position;
-                    var rotatition = hit.point - this.transform.position;
-                    rotatition.y = 0;
-                    this.transform.rotation = Quaternion.LookRotation(rotatition);
-                 }*/
-
             }
         }
     }   
@@ -178,16 +170,19 @@ public class TouchEat : MonoBehaviour
         }
     }   
 
-    IEnumerator DestroyLevelAndFox(float timeDestroy)
+    public IEnumerator DestroyLevelAndFox(float timeDestroy)
     {
         yield return new WaitForSeconds(timeDestroy);        
         var level = GameObject.FindGameObjectWithTag("level");
         target.transform.SetParent(null);
-        Destroy(level);
-        
+        Destroy(level);        
         Destroy(this.gameObject);
     }
 
+    public void SetSpeed(float speedNew)
+    {
+        SPEED = speedNew;
+    }
     
 
 }
