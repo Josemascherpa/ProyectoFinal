@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Chicken: {fileID: 3739989377421315790, guid: 218b2c79f72ed264da834b5c6b179b0d, type: 3}
   Ball: {fileID: 3870103030085259839, guid: c21f07710caa31946b184d6d114b9f64, type: 3}
-  cantChicken: 10
+  cantChicken: 100
   positionBall: {fileID: 1386121055437543461}
   canvas: {fileID: 0}
   chickenPick: 0

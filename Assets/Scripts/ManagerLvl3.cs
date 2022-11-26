@@ -34,18 +34,16 @@ public class ManagerLvl3 : MonoBehaviour
         timerText = canvas.transform.GetChild(4).gameObject;
         timerText.SetActive(true);
     }
-
     private void Update()
     {
-        
+        Z = GameObject.FindGameObjectWithTag("Zlvl3");
+        Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
+        X = GameObject.FindGameObjectWithTag("Xlvl3");
+        X2 = GameObject.FindGameObjectWithTag("X2lvl3");
         if (!instaChicken)
         {
             for (int i = 0; i < cantChicken; i++)
-            {
-                Z = GameObject.FindGameObjectWithTag("Zlvl3");
-                Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
-                X = GameObject.FindGameObjectWithTag("Xlvl3");
-                X2 = GameObject.FindGameObjectWithTag("X2lvl3");             
+            {                     
                 var chicken = Instantiate(Chicken,this.transform);
                 chicken.transform.position = new Vector3(Random.Range(X.transform.position.x, X2.transform.position.x), X.transform.position.y, Random.Range(Z.transform.position.z, Z2.transform.position.z));
             }
@@ -66,8 +64,7 @@ public class ManagerLvl3 : MonoBehaviour
         {
             Win();
             GameOver();
-        }
-        
+        }        
     }
     private void TimerGame()
     {
@@ -94,8 +91,7 @@ public class ManagerLvl3 : MonoBehaviour
                 var ball = GameObject.FindGameObjectWithTag("ball");
                 Destroy(ball);
                 var level = GameObject.FindGameObjectWithTag("level");
-                Destroy(level);
-                
+                Destroy(level);                
             }
         }
     }
@@ -113,9 +109,7 @@ public class ManagerLvl3 : MonoBehaviour
                 Destroy(ball);
                 var level = GameObject.FindGameObjectWithTag("level");
                 Destroy(level);
-            }
-            
-            
+            }            
         }
     }
 
