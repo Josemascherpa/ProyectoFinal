@@ -12,7 +12,7 @@ public class ChickenScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speedRotation = Random.Range(1f, 9f);
+        speedRotation = Random.Range(8f, 25f);
         Z = GameObject.FindGameObjectWithTag("Zlvl3");
         Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
         X = GameObject.FindGameObjectWithTag("Xlvl3");
@@ -20,7 +20,7 @@ public class ChickenScript : MonoBehaviour
     }
     private void Update()
     {
-        transform.eulerAngles += new Vector3(0, speedRotation, 0);
+        transform.eulerAngles += new Vector3(0, speedRotation*Time.deltaTime, 0);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -20,6 +20,7 @@ public class PlacementIndicator : MonoBehaviour
     [SerializeField] private GameObject phone;
     [SerializeField] private GameObject Level1;
     private GameObject canvas;
+    [SerializeField] private GameObject managerLvls;
 
     private void Awake()
     {

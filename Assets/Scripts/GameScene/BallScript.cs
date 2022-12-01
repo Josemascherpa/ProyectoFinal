@@ -10,12 +10,18 @@ public class BallScript : MonoBehaviour
     {
         managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
     }
+    private void Update()
+    {
+        if (transform.position.y < -0.2f)
+        {
+            Destroy(this.gameObject);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("tree"))
-        {
-            
-            this.transform.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 1f * -1, ForceMode.Impulse);
+        {            
+            this.transform.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.8f * -1, ForceMode.Impulse);
         }
     }
 

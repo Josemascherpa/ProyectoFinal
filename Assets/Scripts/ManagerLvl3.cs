@@ -25,6 +25,7 @@ public class ManagerLvl3 : MonoBehaviour
     private bool setSpeed = false;
     private bool instaChicken = false;
     private GameObject targetFox;
+    private GameObject ballInGame;
     void Start()
     {
         targetFox = GameObject.FindGameObjectWithTag("targetFox");
@@ -33,9 +34,16 @@ public class ManagerLvl3 : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("canvas");
         timerText = canvas.transform.GetChild(4).gameObject;
         timerText.SetActive(true);
+        ballInGame = GameObject.FindGameObjectWithTag("ball");
     }
     private void Update()
-    {
+    {       
+        if (ballInGame == null)
+        {
+            Instantiate(Ball, positionBall.transform.position, Quaternion.identity);//REVISAR
+            ballInGame = GameObject.FindGameObjectWithTag("ball");
+        }
+        
         Z = GameObject.FindGameObjectWithTag("Zlvl3");
         Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
         X = GameObject.FindGameObjectWithTag("Xlvl3");
@@ -85,7 +93,7 @@ public class ManagerLvl3 : MonoBehaviour
         {
             canvas.transform.GetChild(2).gameObject.SetActive(true);
             if (fox != null) {
-                
+                timerText.SetActive(false);
                 Destroy(fox);
                 targetFox.transform.SetParent(null);
                 var ball = GameObject.FindGameObjectWithTag("ball");

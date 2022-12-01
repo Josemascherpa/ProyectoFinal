@@ -35,6 +35,8 @@ TagManager:
   - Z2lvl3
   - timer
   - targetFox
+  - elevation
+  - tronco
   layers:
   - Default
   - TransparentFX
@@ -46,7 +48,7 @@ TagManager:
   - collectFood
   - Tree
   - Cucha
-  - 
+  - Elevation
   - 
   - 
   - 

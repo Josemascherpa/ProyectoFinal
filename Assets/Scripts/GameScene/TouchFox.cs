@@ -86,7 +86,7 @@ public class TouchFox : MonoBehaviour
              
         if (collision.gameObject.CompareTag("ball"))
         {            
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 1f, ForceMode.Impulse);            
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.6f, ForceMode.Impulse);            
         }
         if (collision.gameObject.CompareTag("lava"))
         {
@@ -102,7 +102,8 @@ public class TouchFox : MonoBehaviour
             Idle = true;
             StartCoroutine(DestroyLevelAndFox(0.01f));
             proxLevel.SetActive(true);
-        }        
+        }
+        
     }
     private void OnCollisionStay(Collision collision)
     {
@@ -112,11 +113,20 @@ public class TouchFox : MonoBehaviour
         }
     }
 
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("plataformaMov"))
         {
             this.transform.SetParent(null);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("elevation"))
+        {            
+            rb.AddForce(new Vector3(0, 1f, 0) * 0.2f, ForceMode.Impulse);
         }
     }
 
@@ -133,23 +143,23 @@ public class TouchFox : MonoBehaviour
             RaycastHit hit;            
             canvas.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
             if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)
-            {                        
-                 if (!hit.collider.CompareTag("fox"))
-                 {                        
-                        target.transform.SetParent(null);
-                        target.transform.position = hit.point; 
-                        var rotatition = target.transform.position-this.transform.position;
-                        rotatition.y = 0;
-                        this.transform.rotation = Quaternion.LookRotation(rotatition);
-                        move = true;
-                        if (Singleton.Level == 2)
-                        {                            
-                            managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
-                            managerLvl3.GetComponent<ManagerLvl3>().startTimer = true;
-                            managerLvl3 = null;                            
-                        }
-                    
-                 }
+            {                
+                if (!hit.collider.CompareTag("fox"))
+                {                        
+                       target.transform.SetParent(null);
+                       target.transform.position = hit.point; 
+                       var rotatition = target.transform.position-this.transform.position;
+                       rotatition.y = 0;
+                       this.transform.rotation = Quaternion.LookRotation(rotatition);
+                       move = true;
+                       if (Singleton.Level == 2)
+                       {                            
+                           managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
+                           managerLvl3.GetComponent<ManagerLvl3>().startTimer = true;
+                           managerLvl3 = null;                            
+                       }
+
+                }
             }
         }
     }   
