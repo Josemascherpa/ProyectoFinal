@@ -12,10 +12,10 @@ public class BallScript : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.position.y < -0.6f)
+        /*if (transform.position.y < -0.6f)//BUGEA
         {
             Destroy(this.gameObject);
-        }
+        }*/
     }
     private void OnCollisionEnter(Collision collision)
     {
