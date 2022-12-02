@@ -12,7 +12,7 @@ public class BallScript : MonoBehaviour
     }
     private void Update()
     {
-        if (transform.position.y < -0.2f)
+        if (transform.position.y < -0.6f)
         {
             Destroy(this.gameObject);
         }

@@ -88,7 +88,7 @@ public class TouchFox : MonoBehaviour
         {            
             collision.gameObject.GetComponent<Rigidbody>().AddForce(collision.contacts[0].normal * 0.6f, ForceMode.Impulse);            
         }
-        if (collision.gameObject.CompareTag("lava"))
+        if (collision.gameObject.CompareTag("lava") || collision.gameObject.CompareTag("arrow") || collision.gameObject.CompareTag("tronco"))
         {
             move = false;
             StartCoroutine(DestroyLevelAndFox(0.01f));

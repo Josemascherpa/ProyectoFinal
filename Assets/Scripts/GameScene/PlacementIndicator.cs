@@ -18,7 +18,7 @@ public class PlacementIndicator : MonoBehaviour
     [SerializeField] private TMP_Text timeCanvas;
     [SerializeField] private GameObject Ubicator;
     [SerializeField] private GameObject phone;
-    [SerializeField] private GameObject Level1;
+    //[SerializeField] private GameObject Level1;
     private GameObject canvas;
     [SerializeField] private GameObject managerLvls;
 
@@ -72,7 +72,7 @@ public class PlacementIndicator : MonoBehaviour
                         }
                     }
                     timeCanvas.text = "";
-                    var lvl1 = Instantiate(Level1);
+                    var lvl1 = Instantiate(managerLvls.GetComponent<ManagerLevels>().listaNiveles[0]);
                     lvl1.transform.position = hits[0].pose.position;
                     Singleton.positionLevels = hits[0].pose.position;
                     lvl1.transform.rotation = Ubicator.transform.rotation;

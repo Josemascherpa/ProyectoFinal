@@ -37,6 +37,7 @@ TagManager:
   - targetFox
   - elevation
   - tronco
+  - arrow
   layers:
   - Default
   - TransparentFX
@@ -47,8 +48,8 @@ TagManager:
   - Terrain
   - collectFood
   - Tree
-  - Cucha
-  - Elevation
+  - Arrow
+  - 
   - 
   - 
   - 
