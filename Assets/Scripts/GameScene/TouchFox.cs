@@ -19,7 +19,7 @@ public class TouchFox : MonoBehaviour
     public bool iniciateMove = false;
 
     public LayerMask evitarRayos;    
-    private GameObject canvas;  
+    [SerializeField]private GameObject canvas;  
     //[SerializeField] private GameObject printss;
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;
@@ -34,13 +34,12 @@ public class TouchFox : MonoBehaviour
 
     void Start()
     {
-        
+        print("START EMPEZO");
         target = GameObject.FindGameObjectWithTag("targetFox");
         target.transform.position = this.transform.position;
-        canvas = GameObject.FindGameObjectWithTag("canvas");
-        
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
+        canvas = GameObject.FindGameObjectWithTag("canvas");        
+        anim = this.GetComponent<Animator>();
+        rb = this.GetComponent<Rigidbody>();
         reinicioLvl = canvas.transform.GetChild(3).gameObject;
         proxLevel = canvas.transform.GetChild(2).gameObject;
     }
@@ -48,10 +47,10 @@ public class TouchFox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        canvas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "" + SPEED;
-
+        //canvas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "" + SPEED;
+       
         if (target == null)
-        {
+        {            
             Instantiate(prefabTarget);
             target = GameObject.FindGameObjectWithTag("targetFox");
             target.transform.position = this.transform.position;
@@ -145,19 +144,14 @@ public class TouchFox : MonoBehaviour
             if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)
             {                
                 if (!hit.collider.CompareTag("fox"))
-                {                        
+                {
+                    
                        target.transform.SetParent(null);
                        target.transform.position = hit.point; 
                        var rotatition = target.transform.position-this.transform.position;
                        rotatition.y = 0;
                        this.transform.rotation = Quaternion.LookRotation(rotatition);
-                       move = true;
-                       if (Singleton.Level == 2)
-                       {                            
-                           managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
-                           managerLvl3.GetComponent<ManagerLvl3>().startTimer = true;
-                           managerLvl3 = null;                            
-                       }
+                       move = true;                       
 
                 }
             }
@@ -187,6 +181,7 @@ public class TouchFox : MonoBehaviour
         target.transform.SetParent(null);
         Destroy(level);        
         Destroy(this.gameObject);
+        
     }
 
     public void SetSpeed(float speedNew)

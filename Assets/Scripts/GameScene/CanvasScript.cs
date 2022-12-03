@@ -32,12 +32,7 @@ public class CanvasScript : MonoBehaviour
         //Instanciar mismo lvl
         Instantiate(managerLevels.GetComponent<ManagerLevels>().listaNiveles[Singleton.Level], Singleton.positionLevels, Singleton.rotationLevels);        
         reiLevel.SetActive(false);
-        proxLevel.SetActive(false);
-        if (Singleton.Level == 2)//Reactivo el timer al presionar reiniciar
-        {
-            var managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
-            managerLevels.GetComponent<ManagerLvl3>().startTimer = true;
-        }
+        proxLevel.SetActive(false);       
 
     }
 

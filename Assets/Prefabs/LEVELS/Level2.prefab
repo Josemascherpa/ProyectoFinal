@@ -19864,6 +19864,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LPW_Tree_B1_9m_01
       objectReference: {fileID: 0}
+    - target: {fileID: 8264893200594217152, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264893200594217152, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264893200594217152, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
 --- !u!4 &2005426472479571157 stripped
@@ -24007,6 +24019,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8609424245623317449, guid: 58fc092f69a6d8b4ea8dd39a8426b1c5, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8609424245623317449, guid: 58fc092f69a6d8b4ea8dd39a8426b1c5, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58fc092f69a6d8b4ea8dd39a8426b1c5, type: 3}
 --- !u!4 &1520211951184777474 stripped
@@ -27439,7 +27459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1414891419564146629, guid: 83571c14e5a190c4983d98166fcccdba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0325
+      value: 0.0389
       objectReference: {fileID: 0}
     - target: {fileID: 1414891419564146629, guid: 83571c14e5a190c4983d98166fcccdba, type: 3}
       propertyPath: m_LocalPosition.z
