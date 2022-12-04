@@ -10,10 +10,10 @@ public class ManagerLvl3 : MonoBehaviour
     [SerializeField] private GameObject Chicken;
     [SerializeField] private GameObject Ball;
     public int cantChicken;
-    private GameObject X;
+    /*private GameObject X;
     private GameObject X2;
     private GameObject Z;
-    private GameObject Z2;
+    private GameObject Z2;*/
     [SerializeField] private GameObject positionBall;
     [SerializeField] private GameObject canvas;
     public int chickenPick=0;
@@ -51,14 +51,15 @@ public class ManagerLvl3 : MonoBehaviour
             ballInGame.transform.SetParent(level.transform);
         }
         
-        Z = GameObject.FindGameObjectWithTag("Zlvl3");
-        Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
-        X = GameObject.FindGameObjectWithTag("Xlvl3");
-        X2 = GameObject.FindGameObjectWithTag("X2lvl3");
+        
         if (!instaChicken)
         {
             for (int i = 0; i < cantChicken; i++)
-            {                     
+            {
+                var Z = GameObject.FindGameObjectWithTag("Zlvl3");
+                var Z2 = GameObject.FindGameObjectWithTag("Z2lvl3");
+                var X = GameObject.FindGameObjectWithTag("Xlvl3");
+                var X2 = GameObject.FindGameObjectWithTag("X2lvl3");
                 var chicken = Instantiate(Chicken,this.transform);                
                 chicken.transform.position = new Vector3(Random.Range(X.transform.position.x, X2.transform.position.x), X.transform.position.y, Random.Range(Z.transform.position.z, Z2.transform.position.z));
             }
