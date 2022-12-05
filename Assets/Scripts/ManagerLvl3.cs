@@ -29,6 +29,7 @@ public class ManagerLvl3 : MonoBehaviour
     private GameObject level;
     void Start()
     {
+        print("CARGO EL LVL 2 START");
         
         positionBall = GameObject.FindGameObjectWithTag("positionBallLvl3");
         ballInGame = Instantiate(Ball, positionBall.transform.position,Quaternion.identity);

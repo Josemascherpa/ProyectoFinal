@@ -33,8 +33,7 @@ public class TouchFox : MonoBehaviour
 
 
     void Start()
-    {
-        print("START EMPEZO");
+    {        
         target = GameObject.FindGameObjectWithTag("targetFox");
         target.transform.position = this.transform.position;
         canvas = GameObject.FindGameObjectWithTag("canvas");        

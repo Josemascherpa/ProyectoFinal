@@ -325,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657892445184269696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21, y: 0.0129, z: 0.062}
+  m_LocalPosition: {x: 0.21, y: 0.0198, z: 0.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -405,7 +405,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -522,7 +522,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.46728808, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.801, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -584,7 +584,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.005
+      scalar: 0.009
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10086,7 +10086,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -19864,6 +19864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LPW_Tree_B1_9m_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4899621750382598614, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8264893200594217152, guid: e20472a0ca1b8454088bd161ceeac607, type: 3}
       propertyPath: InitialModule.rotation3D
       value: 0
@@ -23971,6 +23975,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4807929268454364999}
     m_Modifications:
+    - target: {fileID: 4073090544940098013, guid: 58fc092f69a6d8b4ea8dd39a8426b1c5, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6883603557705808599, guid: 58fc092f69a6d8b4ea8dd39a8426b1c5, type: 3}
       propertyPath: m_Name
       value: LPW_Tree_B1_9m_01 1
