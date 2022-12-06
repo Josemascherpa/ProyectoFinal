@@ -38,6 +38,12 @@ TagManager:
   - elevation
   - tronco
   - arrow
+  - maxZ
+  - minX
+  - maxX
+  - minZ
+  - Stop
+  - Audio
   layers:
   - Default
   - TransparentFX
