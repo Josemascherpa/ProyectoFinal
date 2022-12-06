@@ -146,7 +146,8 @@ public class TouchFox : MonoBehaviour
                 {
                     
                        target.transform.SetParent(null);
-                       target.transform.position = hit.point; 
+                       target.transform.position = hit.point;
+                        target.transform.GetChild(0).gameObject.SetActive(true);
                        var rotatition = target.transform.position-this.transform.position;
                        rotatition.y = 0;
                        this.transform.rotation = Quaternion.LookRotation(rotatition);
