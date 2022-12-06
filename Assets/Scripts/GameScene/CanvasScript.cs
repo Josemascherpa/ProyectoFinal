@@ -21,8 +21,7 @@ public class CanvasScript : MonoBehaviour
         reiLevel = this.transform.GetChild(3).gameObject;
     }
     private void Update()
-    {
-        
+    {        
         if (sonido)
         {
             sonidoLevel = GameObject.FindGameObjectWithTag("Audio");
