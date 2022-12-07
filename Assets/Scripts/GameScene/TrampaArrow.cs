@@ -13,7 +13,7 @@ public class TrampaArrow : MonoBehaviour
     void Start()
     {
         level = GameObject.FindGameObjectWithTag("level");
-        StartCoroutine(InstantiateArrow(timeArrow));
+        StartCoroutine(InstantiateArrow(timeArrow));//corrutina para lanzar flecha cada cierto tiempo
     }
     
     IEnumerator InstantiateArrow(float timeArrow)

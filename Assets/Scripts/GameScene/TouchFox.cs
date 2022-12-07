@@ -17,21 +17,14 @@ public class TouchFox : MonoBehaviour
     private bool Idle = true;
     private bool Walk = false;
     public bool iniciateMove = false;
-
     public LayerMask evitarRayos;    
-    [SerializeField]private GameObject canvas;  
-    //[SerializeField] private GameObject printss;
+    [SerializeField]private GameObject canvas;      
     [SerializeField] private GameObject reinicioLvl;
-    [SerializeField] private GameObject proxLevel;
-    
+    [SerializeField] private GameObject proxLevel;    
     private float SPEED = 1;
     private GameObject target;
     [SerializeField] private GameObject prefabTarget;
-
-    private GameObject managerLvl3;
-
-
-
+    private float speedElevation = 0.2f;
     void Start()
     {        
         target = GameObject.FindGameObjectWithTag("targetFox");
@@ -42,19 +35,17 @@ public class TouchFox : MonoBehaviour
         reinicioLvl = canvas.transform.GetChild(3).gameObject;
         proxLevel = canvas.transform.GetChild(2).gameObject;
     }
-
-    // Update is called once per frame
+    
     void Update()
-    {
-        //canvas.transform.GetChild(1).gameObject.GetComponent<Text>().text = "" + SPEED;
+    {    
        
-        if (target == null)
+        if (target == null)//Si target es null, lo vuelvo a instanciar
         {            
             Instantiate(prefabTarget);
             target = GameObject.FindGameObjectWithTag("targetFox");
             target.transform.position = this.transform.position;
         }        
-        if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)
+        if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)//Distancia entre el target y la posicion para las animaciones
         {            
             Walk = false;
             Idle = true;
@@ -65,15 +56,15 @@ public class TouchFox : MonoBehaviour
             Walk = true;
             Idle = false;
         }
-        IsPointerOverUIObject();        
-        Touch();
+        IsPointerOverUIObject();//Verifico que no se presione en un canvas 
+        Touch();//Raycast para mover
         anim.SetBool("Idle", Idle);        
         anim.SetBool("Walk", Walk);       
         
     }
     private void FixedUpdate()
     {
-        if (move)
+        if (move)//movimineto por rigidbody
         {
             Movement(target.transform.position);
         }
@@ -94,8 +85,7 @@ public class TouchFox : MonoBehaviour
             rb.detectCollisions = false;
         }
         if (collision.gameObject.CompareTag("NextLevel"))
-        {
-            //target = this.transform.position;
+        {            
             Walk = false;
             Idle = true;
             StartCoroutine(DestroyLevelAndFox(0.01f));
@@ -124,7 +114,7 @@ public class TouchFox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("elevation"))
         {            
-            rb.AddForce(new Vector3(0, 1f, 0) * 0.2f, ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 1f, 0) * speedElevation, ForceMode.Impulse);
         }
     }
 
@@ -140,17 +130,16 @@ public class TouchFox : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(toque.position);
             RaycastHit hit;            
             canvas.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
-            if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)
+            if (Physics.Raycast(ray, out hit,100, ~evitarRayos) && !UIDetect)//Ciertas capas evitables
             {                
-                if (!hit.collider.CompareTag("fox"))
-                {
-                    
+                if (!hit.collider.CompareTag("fox"))//Si el rayo lanzado no choca con fox
+                {                    
                        target.transform.SetParent(null);
-                       target.transform.position = hit.point;
-                        target.transform.GetChild(0).gameObject.SetActive(true);
+                       target.transform.position = hit.point;//pongo target donde colisiono el rayo
+                        target.transform.GetChild(0).gameObject.SetActive(true);//activo el marcador del target
                        var rotatition = target.transform.position-this.transform.position;
                        rotatition.y = 0;
-                       this.transform.rotation = Quaternion.LookRotation(rotatition);
+                       this.transform.rotation = Quaternion.LookRotation(rotatition);//Y roto el lobo hacia el target
                        move = true;                       
 
                 }
@@ -158,7 +147,7 @@ public class TouchFox : MonoBehaviour
         }
     }   
 
-    private void IsPointerOverUIObject()//DETECTO UI 
+    private void IsPointerOverUIObject()//DETECTO UI, lanzo ryao antes que el otro raycast, para detectar si se toco o no un boton o algo del UI
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -174,17 +163,16 @@ public class TouchFox : MonoBehaviour
         }
     }   
 
-    public IEnumerator DestroyLevelAndFox(float timeDestroy)
+    public IEnumerator DestroyLevelAndFox(float timeDestroy)//Corrutina para eliminar al cambiar o reiniciar los niveles
     {
         yield return new WaitForSeconds(timeDestroy);        
         var level = GameObject.FindGameObjectWithTag("level");
         target.transform.SetParent(null);
         Destroy(level);        
-        Destroy(this.gameObject);
-        
+        Destroy(this.gameObject);        
     }
 
-    public void SetSpeed(float speedNew)
+    public void SetSpeed(float speedNew)//metodo para setear la velocidad del lobo
     {
         SPEED = speedNew;
     }

@@ -8,16 +8,14 @@ public class CanvasScript : MonoBehaviour
 {
     public GameObject managerLevels;
     private GameObject proxLevel;
-    private GameObject reiLevel;
-    private GameObject targetFox;
+    private GameObject reiLevel;    
     private bool sonido = true;
     private GameObject sonidoLevel;
     private GameObject sonidoGO;
     private void Awake()
     {
         sonidoGO = this.transform.GetChild(5).gameObject;
-        sonidoGO.SetActive(false);
-        targetFox = GameObject.FindGameObjectWithTag("targetFox");
+        sonidoGO.SetActive(false);        
         managerLevels = GameObject.FindGameObjectWithTag("managerLevel");
         proxLevel = this.transform.GetChild(2).gameObject;
         reiLevel = this.transform.GetChild(3).gameObject;
@@ -26,7 +24,7 @@ public class CanvasScript : MonoBehaviour
     {        
         
         var level = GameObject.FindGameObjectWithTag("level");
-        if (level != null)
+        if (level != null)//Si existe un nivel, activo el UI de sonido
         {
             sonidoGO.SetActive(true);
             if (sonido)
@@ -44,7 +42,7 @@ public class CanvasScript : MonoBehaviour
         
 
     }
-    public void ProximoNivel()
+    public void ProximoNivel()//metodo boton proximo nivel
     {
         Singleton.Level += 1;
         //Instanciar level
@@ -53,7 +51,7 @@ public class CanvasScript : MonoBehaviour
         
     }
 
-    public void ReiniciarLevel()
+    public void ReiniciarLevel()//metodo boton reiniciar nivel
     {
         //Instanciar mismo lvl
         Instantiate(managerLevels.GetComponent<ManagerLevels>().listaNiveles[Singleton.Level], Singleton.positionLevels, Singleton.rotationLevels);        

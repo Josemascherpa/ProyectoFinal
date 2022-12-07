@@ -6,7 +6,7 @@ public class Arrow : MonoBehaviour
 {
     
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)//Destruir al chocar algo
     {
         Destroy(gameObject);
     }

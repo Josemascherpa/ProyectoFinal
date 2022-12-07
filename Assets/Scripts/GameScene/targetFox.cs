@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class targetFox : MonoBehaviour
 {
-    private GameObject marcador;
-    private Quaternion rotationStart;
+    private GameObject marcador;   
     private void Start()
     {
         marcador = this.transform.GetChild(0).gameObject;

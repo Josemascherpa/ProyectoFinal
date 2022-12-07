@@ -17,9 +17,7 @@ public class PlacementIndicator : MonoBehaviour
     [SerializeField] private bool Initialize = false;
     [SerializeField] private TMP_Text timeCanvas;
     [SerializeField] private GameObject Ubicator;
-    [SerializeField] private GameObject phone;
-    //[SerializeField] private GameObject Level1;
-    private GameObject canvas;
+    [SerializeField] private GameObject phone;        
     [SerializeField] private GameObject managerLvls;
 
     private void Awake()
@@ -28,7 +26,7 @@ public class PlacementIndicator : MonoBehaviour
     }
     void Start()
     {
-        canvas = GameObject.FindGameObjectWithTag("canvas");
+        
         rayManager = FindObjectOfType<ARRaycastManager>();        
         Ubicator.SetActive(false);//DESACTIVO EL CUADRADO DE UBICACION
 
@@ -37,7 +35,7 @@ public class PlacementIndicator : MonoBehaviour
     void Update()
     {     
 
-        if(timeScan<10)
+        if(timeScan<10)//Tiempo para escanear
         {            
             timeScan += Time.deltaTime;
             timeCanvas.text = "ESCANEA LA SUPERFICIE UNOS SEGUNDOS";
@@ -51,7 +49,7 @@ public class PlacementIndicator : MonoBehaviour
         }      
 
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
-        rayManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.Planes);//Tiro un rayo hacia los planos desde la camara
+        rayManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.Planes);//Tiro un rayo constante hacia los planos desde la camara
         if (hits.Count > 0 && scan)//Si el rayo pega en algo
         {
             transform.position = hits[0].pose.position;//Voy poniendo la rotacion y posicion del cuadrado en ese rayo
@@ -64,7 +62,7 @@ public class PlacementIndicator : MonoBehaviour
                     var planeGO = arPlaneManager.GetPlane(hits[0].trackableId).gameObject;
                     planeGO.name = "planes";
                     var array = GameObject.FindGameObjectsWithTag("plane");
-                    for (int i = 0; i < array.Length; i++)
+                    for (int i = 0; i < array.Length; i++)//array con todo los planos
                     {
                         if (array[i].name != "planes")
                         {
@@ -72,9 +70,9 @@ public class PlacementIndicator : MonoBehaviour
                         }
                     }
                     timeCanvas.text = "";
-                    var lvl1 = Instantiate(managerLvls.GetComponent<ManagerLevels>().listaNiveles[0]);
+                    var lvl1 = Instantiate(managerLvls.GetComponent<ManagerLevels>().listaNiveles[0]);//Instancio primer nivel
                     lvl1.transform.position = hits[0].pose.position;
-                    Singleton.positionLevels = hits[0].pose.position;
+                    Singleton.positionLevels = hits[0].pose.position;//guardo posiciones en el singleton para los demas niveles
                     lvl1.transform.rotation = Ubicator.transform.rotation;
                     Singleton.rotationLevels = Ubicator.transform.rotation;
                     lvl1.transform.SetParent(null);                    

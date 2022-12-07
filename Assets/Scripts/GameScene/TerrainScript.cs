@@ -20,7 +20,7 @@ public class TerrainScript : MonoBehaviour
             case 0: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "HEIKO DEBE LLEGAR AL OTRO LADO!!"; break;
             case 1: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "LOGRAR PASAR PARA QUE HEIKO LLEGUE A SU DESTINO"; break;
             case 2: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "EMPUJAR LA PELOTA CON HEIKO Y AGARRAR TODOS LOS POLLITOS"; break;
-            case 3: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES SUBIR AL PISO DE ARRIBA, CUIDADO CON LAS TRAMPAS!!"; break;            
+            case 3: canvas.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = "DEBES SUBIR AL PISO DE ARRIBA, CUIDADO CON LAS TRAMPAS!!"; break;
             default: break;
         }
     }

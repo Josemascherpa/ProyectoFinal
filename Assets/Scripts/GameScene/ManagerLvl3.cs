@@ -9,11 +9,7 @@ public class ManagerLvl3 : MonoBehaviour
 {
     [SerializeField] private GameObject Chicken;
     [SerializeField] private GameObject Ball;
-    public int cantChicken;
-    /*private GameObject X;
-    private GameObject X2;
-    private GameObject Z;
-    private GameObject Z2;*/
+    public int cantChicken;    
     [SerializeField] private GameObject positionBall;
     [SerializeField] private GameObject canvas;
     public int chickenPick=0;
@@ -28,32 +24,23 @@ public class ManagerLvl3 : MonoBehaviour
     private Vector3 positionInitialBall;
     private GameObject level;
     void Start()
-    {
-        print("CARGO EL LVL 2 START");
-        
+    {               
         positionBall = GameObject.FindGameObjectWithTag("positionBallLvl3");
         ballInGame = Instantiate(Ball, positionBall.transform.position,Quaternion.identity);
         positionInitialBall = ballInGame.transform.position;
         level = GameObject.FindGameObjectWithTag("level");
         ballInGame.transform.SetParent(level.transform);
         canvas = GameObject.FindGameObjectWithTag("canvas");
-        timerText = canvas.transform.GetChild(4).gameObject;
-        
-        
+        timerText = canvas.transform.GetChild(4).gameObject; 
     }
     private void Update()
     {       
-        if(ballInGame.transform.position != positionInitialBall && !startTimer)
+        if(ballInGame.transform.position != positionInitialBall && !startTimer)//EMpiezo timer del nivel
         {            
             startTimer = true;
-        }
-        if (ballInGame == null){
-            ballInGame = Instantiate(Ball, positionBall.transform.position, Quaternion.identity);
-            ballInGame.transform.SetParent(level.transform);
-        }
+        }           
         
-        
-        if (!instaChicken)
+        if (!instaChicken)//INSTANCIO POLLOS
         {
             for (int i = 0; i < cantChicken; i++)
             {
@@ -66,18 +53,21 @@ public class ManagerLvl3 : MonoBehaviour
             }
             instaChicken = true;
         }                
-        if (!setSpeed)
+
+        if (!setSpeed)//Seteo velocidad de heiko para que sea mas rapido
         {           
             fox = GameObject.FindGameObjectWithTag("fox");
             fox.GetComponent<TouchFox>().SetSpeed(2);
             fox.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             setSpeed = true; 
         }
-        if (startTimer)
+
+        if (startTimer)//COrre el timer
         {
             TimerGame();
         }
-        if (time <= 0)
+
+        if (time <= 0)//Variables de gane o perdi
         {
             Win();
             GameOver();
