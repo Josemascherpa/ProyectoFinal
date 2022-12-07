@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4807929268454364999}
   m_Layer: 0
-  m_Name: Decoration
+  m_Name: Decoracion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15503,7 +15503,7 @@ GameObject:
   - component: {fileID: 2176216711393915611}
   - component: {fileID: 3092290877045571326}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: LLuvia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

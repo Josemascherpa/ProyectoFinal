@@ -166,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4961774448128917881}
   m_Layer: 0
-  m_Name: Decoration
+  m_Name: Decoracion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3654389567975278180}
   m_Layer: 0
-  m_Name: PositionBall
+  m_Name: PosicionBall
   m_TagString: positionBallLvl3
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
