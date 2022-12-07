@@ -12,9 +12,11 @@ public class CanvasScript : MonoBehaviour
     private GameObject targetFox;
     private bool sonido = true;
     private GameObject sonidoLevel;
-
+    private GameObject sonidoGO;
     private void Awake()
     {
+        sonidoGO = this.transform.GetChild(5).gameObject;
+        sonidoGO.SetActive(false);
         targetFox = GameObject.FindGameObjectWithTag("targetFox");
         managerLevels = GameObject.FindGameObjectWithTag("managerLevel");
         proxLevel = this.transform.GetChild(2).gameObject;
@@ -22,15 +24,25 @@ public class CanvasScript : MonoBehaviour
     }
     private void Update()
     {        
-        if (sonido)
+        
+        var level = GameObject.FindGameObjectWithTag("level");
+        if (level != null)
         {
-            sonidoLevel = GameObject.FindGameObjectWithTag("Audio");
-            sonidoLevel.GetComponent<AudioSource>().UnPause();
-        }else if (!sonido)
-        {
-            sonidoLevel = GameObject.FindGameObjectWithTag("Audio");
-            sonidoLevel.GetComponent<AudioSource>().Pause();
+            sonidoGO.SetActive(true);
+            if (sonido)
+            {
+                sonidoLevel = GameObject.FindGameObjectWithTag("Audio");
+                sonidoLevel.GetComponent<AudioSource>().UnPause();
+            }
+            else if (!sonido)
+            {
+                sonidoLevel = GameObject.FindGameObjectWithTag("Audio");
+                sonidoLevel.GetComponent<AudioSource>().Pause();
+            }
+            sonidoGO.GetComponent<Animator>().SetBool("sonido", sonido);
         }
+        
+
     }
     public void ProximoNivel()
     {

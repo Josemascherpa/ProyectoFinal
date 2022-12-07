@@ -11,8 +11,10 @@ public class MainMenu : MonoBehaviour
     private bool sonido = true;
     private GameObject audio;
     private bool UIdetect = false;
+    private GameObject sonidoGO;
     private void Awake()
     {
+        sonidoGO = this.transform.GetChild(6).gameObject;
         Application.targetFrameRate = 60;
     }
     private void Start()
@@ -36,7 +38,7 @@ public class MainMenu : MonoBehaviour
         {
             SceneManager.LoadScene("Game");      
         }
-
+        sonidoGO.GetComponent<Animator>().SetBool("sonido", sonido);
     }
     public void Exit(){        
         Application.Quit();
@@ -60,6 +62,10 @@ public class MainMenu : MonoBehaviour
         {
             UIdetect = false;
         }
+    }
+    public void Instagram()
+    {
+        Application.OpenURL("https://instagram.com/lasaventurasdeheiko");
     }
 
 
