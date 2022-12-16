@@ -9,14 +9,14 @@ public class ManagerLvl3 : MonoBehaviour
 {
     [SerializeField] private GameObject Chicken;
     [SerializeField] private GameObject Ball;
-    public int cantChicken;    
+    [SerializeField]private int cantChicken;    
     [SerializeField] private GameObject positionBall;
     [SerializeField] private GameObject canvas;
-    public int chickenPick=0;
+    public int chickenPick=0;//Publico usado en el script de ball
     private float timeFloat=0;
     private int time=63;
     private GameObject timerText;
-    public bool startTimer = false;
+    private bool startTimer = false;
     private GameObject fox;
     private bool setSpeed = false;
     private bool instaChicken = false;   

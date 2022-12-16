@@ -5,8 +5,8 @@ using UnityEngine;
 public class TrampaArrow : MonoBehaviour
 {
     [SerializeField] private GameObject arrow;
-    public float timeArrow;
-    public float speedArrow;
+    [SerializeField] float timeArrow;
+    [SerializeField] float speedArrow;
     private GameObject level;
     
     //HACER UNA CORRUTINA PARA LANZAR LAS FLECHAS

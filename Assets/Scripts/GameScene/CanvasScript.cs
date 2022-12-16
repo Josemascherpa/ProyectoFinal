@@ -6,7 +6,7 @@ using TMPro;
 
 public class CanvasScript : MonoBehaviour
 {
-    public GameObject managerLevels;
+    private GameObject managerLevels;
     private GameObject proxLevel;
     private GameObject reiLevel;    
     private bool sonido = true;

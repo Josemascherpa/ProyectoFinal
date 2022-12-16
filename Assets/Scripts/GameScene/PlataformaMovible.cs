@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlataformaMovible : MonoBehaviour
 {
-    public float speed = 1;
+    [SerializeField]float speed = 1;
     private GameObject cubo;
     private Vector3 punto1;
     private Vector3 punto2;

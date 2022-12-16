@@ -8,7 +8,7 @@ public class ChickenScript : MonoBehaviour
     [SerializeField] private GameObject X2;
     [SerializeField] private GameObject Z;
     [SerializeField] private GameObject Z2;
-    public float speedRotation;
+    [SerializeField] private float speedRotation;
     // Start is called before the first frame update
     void Start()
     {

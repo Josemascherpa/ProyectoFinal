@@ -10,14 +10,14 @@ using TMPro;
 public class TouchFox : MonoBehaviour
 {
     
-    public bool move = false;    
-    public static bool UIDetect = false;   
+    [SerializeField] bool move = false;    
+    public static bool UIDetect = false;   //DETECTAR CUANDO UN RAYO TOCA UN CANVAS O EL JUEGO
     private Rigidbody rb;
     private Animator anim;    
     private bool Idle = true;
     private bool Walk = false;
-    public bool iniciateMove = false;
-    public LayerMask evitarRayos;    
+    public bool iniciateMove = false;//INICIAR MOVIMIENTO en terrain scripts
+    [SerializeField] LayerMask evitarRayos;    
     [SerializeField]private GameObject canvas;      
     [SerializeField] private GameObject reinicioLvl;
     [SerializeField] private GameObject proxLevel;    
