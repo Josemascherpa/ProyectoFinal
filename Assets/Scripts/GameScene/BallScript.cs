@@ -6,11 +6,13 @@ public class BallScript : MonoBehaviour
 {
     private GameObject managerLvl3;
     private float fuerzaEmpuje = 0.8f;
+    private GameObject target;
     private void Start()
     {
+       
         managerLvl3 = GameObject.FindGameObjectWithTag("managerLvl3");
     }
-   
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("tree"))//Agrego fuerza contraria al chocar con algun objeto con tagg tree

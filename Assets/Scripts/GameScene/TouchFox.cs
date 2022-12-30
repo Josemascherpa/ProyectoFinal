@@ -25,8 +25,10 @@ public class TouchFox : MonoBehaviour
     private GameObject target;
     [SerializeField] private GameObject prefabTarget;
     private float speedElevation = 0.2f;
+    private ParticleSystem particleFog;
     void Start()
-    {        
+    {
+        particleFog = transform.GetChild(2).GetComponent<ParticleSystem>();
         target = GameObject.FindGameObjectWithTag("targetFox");
         target.transform.position = this.transform.position;
         canvas = GameObject.FindGameObjectWithTag("canvas");        
@@ -46,13 +48,15 @@ public class TouchFox : MonoBehaviour
             target.transform.position = this.transform.position;
         }        
         if (Vector3.Distance(this.transform.position,target.transform.position)<0.001)//Distancia entre el target y la posicion para las animaciones
-        {            
+        {
+            particleFog.Stop();
             Walk = false;
             Idle = true;
             move = false;
         }
         else if(Vector3.Distance(this.transform.position, target.transform.position) > 0.02f)
-        {            
+        {
+            particleFog.Play();
             Walk = true;
             Idle = false;
         }
