@@ -24,7 +24,8 @@ public class trampaTronco : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {        
         if (collision.gameObject.CompareTag("tree") || collision.gameObject.CompareTag("NextLevel"))
-        {           
+        {
+            
             target = new Vector3(Random.Range(X.transform.position.x, Xn.transform.position.x), this.transform.position.y, Random.Range(Z.transform.position.z, Zn.transform.position.z));
         }
     }
