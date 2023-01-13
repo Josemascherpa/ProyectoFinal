@@ -16,4 +16,4 @@
 #### Unity Version: 2021.3.1f1
 #### Movil: celulares Android a partir de 8.0(nougat). Puede revisar el siguiente link para mas información: [Versiones Android](https://developers.google.com/ar/devices#google_play) 
 #### Videos y Descarga: [Link Drive](https://drive.google.com/drive/u/2/folders/1E4ioB0stPU3JY5O9hLxaTZG8dIv-3IyL?hl=es)
-#### Instalación: Descargar apk del link del drive en tu movil, y ejecutar.
+#### Instalación: descargar apk del link del drive en tu movil, y ejecutar.
