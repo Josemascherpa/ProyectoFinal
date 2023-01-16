@@ -30,7 +30,9 @@ public class foxMainMenu : MonoBehaviour
         {
             anim.SetBool("Sentarse", true);
             walk = false;
+            Singleton.touchPlayMainMenu = true;
         }
         
     }
+    
 }

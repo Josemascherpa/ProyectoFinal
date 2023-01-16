@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
         {
             audio.GetComponent<AudioSource>().Pause();
         }
-        hueso.sizeDelta = Vector3.SmoothDamp(hueso.sizeDelta, new Vector3(893.2603f, 517.2282f,0), ref velocity, 0.8f);
+        hueso.sizeDelta = Vector3.SmoothDamp(hueso.sizeDelta, new Vector3(500f, 250f,0), ref velocity, 0.8f);
         if (Input.touchCount > 0 && Singleton.touchPlayMainMenu && !UIdetect)
         {
             SceneManager.LoadScene("Game");      
