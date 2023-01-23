@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     private GameObject audio;
     private bool UIdetect = false;
     private GameObject sonidoGO;
+    private bool partidaDetectada = false;
     private void Awake()
     {
         sonidoGO = this.transform.GetChild(6).gameObject;
@@ -21,6 +22,13 @@ public class MainMenu : MonoBehaviour
     {
         audio = GameObject.FindGameObjectWithTag("Audio");
         Singleton.touchPlayMainMenu = false;
+
+        if (SaveManager.loadLevel()!=null)//VERIFICO SI EXISTE PARTIDA
+        {
+            partidaDetectada = true;           
+            this.transform.GetChild(8).gameObject.SetActive(true);            
+        }
+        
     }
     private void Update()
     {
@@ -34,7 +42,7 @@ public class MainMenu : MonoBehaviour
             audio.GetComponent<AudioSource>().Pause();
         }
         hueso.sizeDelta = Vector3.SmoothDamp(hueso.sizeDelta, new Vector3(500f, 250f,0), ref velocity, 0.8f);
-        if (Input.touchCount > 0 && Singleton.touchPlayMainMenu && !UIdetect)
+        if (Input.touchCount > 0 && Singleton.touchPlayMainMenu && !UIdetect && !partidaDetectada )
         {
             SceneManager.LoadScene("Game");      
         }
@@ -68,5 +76,18 @@ public class MainMenu : MonoBehaviour
         Application.OpenURL("https://instagram.com/lasaventurasdeheiko");
     }
 
+    public void CargarPartida()
+    {
+        Singleton.Level = SaveManager.loadLevel().level;//Igualo al singleton para que cargue ese nivel
+        partidaDetectada = false;
+        this.transform.GetChild(8).gameObject.SetActive(false);
+        
+    }
+    public void EliminarPartida()
+    {
+        SaveManager.eliminateData();//Elimino el archivo
+        partidaDetectada = false;
+        this.transform.GetChild(8).gameObject.SetActive(false);
+    }
 
 }

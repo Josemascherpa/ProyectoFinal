@@ -70,7 +70,7 @@ public class PlacementIndicator : MonoBehaviour
                         }
                     }
                     timeCanvas.text = "";
-                    var lvl1 = Instantiate(managerLvls.GetComponent<ManagerLevels>().listaNiveles[0]);//Instancio primer nivel
+                    var lvl1 = Instantiate(managerLvls.GetComponent<ManagerLevels>().listaNiveles[Singleton.Level]);//Instancio primer nivel
                     lvl1.transform.position = hits[0].pose.position;
                     Singleton.positionLevels = hits[0].pose.position;//guardo posiciones en el singleton para los demas niveles
                     lvl1.transform.rotation = Ubicator.transform.rotation;

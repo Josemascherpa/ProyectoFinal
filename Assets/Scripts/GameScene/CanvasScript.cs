@@ -46,7 +46,8 @@ public class CanvasScript : MonoBehaviour
     {
         Singleton.Level += 1;
         //Instanciar level
-        Instantiate(managerLevels.GetComponent<ManagerLevels>().listaNiveles[Singleton.Level], Singleton.positionLevels, Singleton.rotationLevels);        
+        Instantiate(managerLevels.GetComponent<ManagerLevels>().listaNiveles[Singleton.Level], Singleton.positionLevels, Singleton.rotationLevels);
+        SaveManager.SaveLevel(Singleton.Level);
         proxLevel.SetActive(false);
         
     }
