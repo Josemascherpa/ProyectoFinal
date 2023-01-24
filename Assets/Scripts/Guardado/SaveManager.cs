@@ -22,19 +22,18 @@ public static class SaveManager
         //Verifico si existe archivo
         if (File.Exists(dataPath))
         {
-            FileStream fileStream = new FileStream(dataPath, FileMode.Open);
+            FileStream fileStream = new FileStream(dataPath, FileMode.Open);//paso ruta de archivo y lo abro
             BinaryFormatter binaryFormatter = new BinaryFormatter();
-            LevelData levelData = (LevelData)binaryFormatter.Deserialize(fileStream);
+            LevelData levelData = (LevelData)binaryFormatter.Deserialize(fileStream);//casteo a clase leveldata
             fileStream.Close();
             return levelData;
         }
         else
-        {
-            Debug.LogError("No se encontro ningun archivo de guardado");
+        {            
             return null;
         }
     }
-    //Borrado
+    //Borrado  #FFBD06FF  #FFE800FF
     public static void eliminateData()
     {
         string dataPath = Application.persistentDataPath + "/level.save";
