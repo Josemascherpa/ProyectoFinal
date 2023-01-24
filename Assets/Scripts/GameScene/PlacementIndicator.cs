@@ -45,7 +45,7 @@ public class PlacementIndicator : MonoBehaviour
             Destroy(phone);
             scan = true;
             Ubicator.SetActive(true);//ACTIVO CUADRADO UBICACION
-            timeCanvas.text = "USA EL RECUADRO PARA UBICAR EL LEVEL 1";
+            timeCanvas.text = "USA EL RECUADRO PARA UBICAR EL LEVEL";
         }      
 
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
