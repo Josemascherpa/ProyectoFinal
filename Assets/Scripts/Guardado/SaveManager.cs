@@ -3,7 +3,6 @@ using System.IO;//nos permite trabajar con archivos
 using System.Runtime.Serialization.Formatters.Binary;//uso de formateador binario, o sea convertir datos a binarios y guardarlos en el archivo
 public static class SaveManager
 {
-
     //Guardado
     public static void SaveLevel(int level)
     {
@@ -33,7 +32,7 @@ public static class SaveManager
             return null;
         }
     }
-    //Borrado  #FFBD06FF  #FFE800FF
+    //Borrado  
     public static void eliminateData()
     {
         string dataPath = Application.persistentDataPath + "/level.save";
@@ -41,20 +40,5 @@ public static class SaveManager
         {
             File.Delete(dataPath);
         }
-
-    }
-    public static void OverwriteLevel(int newLevel)
-    {
-        string dataPath = Application.persistentDataPath + "/level.save";
-        //Verifico si existe archivo
-        if (File.Exists(dataPath))
-        {
-            FileStream fileStream = new FileStream(dataPath, FileMode.Open);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            LevelData levelData = (LevelData)binaryFormatter.Deserialize(fileStream);           
-            fileStream.Close();
-            
-        }
-    }
-    
+    }    
 }
